@@ -1,5 +1,6 @@
 var song = [];
 var counter = 0;
+var soundTracker = 0;
 
 function preload() {
   for (var  i = 0; i < 8; i++) {
@@ -9,12 +10,16 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(255,0,0);
+  background(50, 50, 50);
 }
 
 function mousePressed() {
-  song[counter].play();
-  //song[counter].onended(song[counter].stop());
-  counter++;
-  if (counter > 7) counter = 0;
+  if (song[soundTracker].isPlaying()) {
+    return;
+  } else {
+    song[counter].play();
+    soundTracker = counter;
+    counter++;
+    if (counter > 7) counter = 0;
+  }
 }
